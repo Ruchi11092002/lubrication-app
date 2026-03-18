@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lubrication Entry</title>
+</head>
+<body>
+    <h2>Lubrication Entry</h2>
+
+    <p><b>Equipment:</b> {{ lubrication.equipment_name }}</p>
+    <p><b>Part:</b> {{ lubrication.part_name }}</p>
+    <p><b>Lubrication Type:</b> {{ lubrication.lubrication_type }}</p>
+    <p><b>Frequency (days):</b> {{ lubrication.frequency_days }}</p>
+
+    <form method="POST">
+        <label>Date:</label><br>
+        <input type="date" name="lubricated_on" value="{{ today }}" required><br><br>
+
+        <label>In-charge:</label><br>
+        <input type="text" name="incharge" required><br><br>
+
+        <label>Remarks:</label><br>
+        <textarea name="remarks"></textarea><br><br>
+
+        <button type="submit">Submit Lubrication</button>
+    </form>
+</body>
+</html>
