@@ -418,6 +418,10 @@ def backup_now():
     result = backup_database()
     return result
 
+@app.route("/")
+def home():
+    return redirect(url_for('dashboard_ui'))
+
 # ---------------- START SCHEDULER ----------------
 scheduler = BackgroundScheduler(daemon=True)
 scheduler.add_job(send_due_alerts, 'cron', hour=10, minute=0)
