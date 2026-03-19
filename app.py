@@ -159,7 +159,7 @@ def dashboard_ui():
             return default
 
     print("ARGS:", request.args)   # ✅ ADD THIS LINE HERE
-    
+
     due_page = safe_int(request.args.get('due_page'), 1)
     overdue_page = safe_int(request.args.get('overdue_page'), 1)
 
@@ -265,20 +265,27 @@ def dashboard_ui():
     end_overdue = start_overdue + ITEMS_PER_PAGE
     overdue_list_paginated = overdue_list[start_overdue:end_overdue]
 
+    import math
+
+    total_due_pages = math.ceil(total_due / ITEMS_PER_PAGE)
+    total_overdue_pages = math.ceil(total_overdue / ITEMS_PER_PAGE)
+        
     return render_template(
-        'dashboard.html',
-        total=total,
-        on_time=on_time,
-        due=due,
-        overdue=overdue,
-        compliance_percent=compliance_percent,
-        due_list=due_list_paginated,
-        overdue_list=overdue_list_paginated,
-        due_page=due_page,
-        overdue_page=overdue_page,
-        total_due=total_due,
-        total_overdue=total_overdue,
-        ITEMS_PER_PAGE=ITEMS_PER_PAGE
+    'dashboard.html',
+    total=total,
+    on_time=on_time,
+    due=due,
+    overdue=overdue,
+    compliance_percent=compliance_percent,
+    due_list=due_list_paginated,
+    overdue_list=overdue_list_paginated,
+    due_page=due_page,
+    overdue_page=overdue_page,
+    total_due=total_due,
+    total_overdue=total_overdue,
+    ITEMS_PER_PAGE=ITEMS_PER_PAGE
+    total_due_pages=total_due_pages,
+    total_overdue_pages=total_overdue_pages,
     )
 
 
