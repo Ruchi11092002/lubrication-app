@@ -154,6 +154,14 @@ def dashboard_ui():
     search_query = request.args.get('search', '').lower()
     lubrications = LubricationMaster.query.filter_by(is_active=True).all()
 
+    # ✅ Apply search filter
+    if search_query:
+        lubrications = [
+            l for l in lubrications
+            if search_query in l.equipment_name.lower()
+            or search_query in l.part_name.lower()
+        ]
+
     total = len(lubrications)
     on_time = 0
     due = 0
