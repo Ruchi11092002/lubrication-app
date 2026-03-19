@@ -151,16 +151,17 @@ def dashboard():
 
 @app.route('/dashboard-ui')
 def dashboard_ui():
-    due_search = request.args.get('due_search', '').lower()
-    overdue_search = request.args.get('overdue_search', '').lower()
-    section_filter = request.args.get('section', '')
-    lubrications = LubricationMaster.query.filter_by(is_active=True).all()
-
 
     due_page = int(request.args.get('due_page', 1))
     overdue_page = int(request.args.get('overdue_page', 1))
 
     ITEMS_PER_PAGE = 10
+    
+    due_search = request.args.get('due_search', '').lower()
+    overdue_search = request.args.get('overdue_search', '').lower()
+    section_filter = request.args.get('section', '')
+    lubrications = LubricationMaster.query.filter_by(is_active=True).all()
+
     # ---------------- PAGINATION ----------------
 
     # Due pagination
