@@ -1,0 +1,80 @@
+<style>
+    body {
+        font-family: 'Segoe UI', Arial;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    h4 {
+        text-align: center;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .cards {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 12px;
+        width: 200px;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .total { background: #2c3e50; }
+    .ontime { background: #27ae60; }
+    .due { background: #f39c12; }
+    .overdue { background: #e74c3c; }
+    .compliance { background: #2980b9; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    th {
+        background: #34495e;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+
+    a.button {
+        padding: 10px 16px;
+        background: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    a.button:hover {
+        background: #2980b9;
+    }
+</style>
