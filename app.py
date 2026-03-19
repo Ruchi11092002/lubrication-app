@@ -1,6 +1,6 @@
 import os
 os.environ["SQLALCHEMY_CEXT_DISABLED"] = "1"
-
+import math
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -283,9 +283,9 @@ def dashboard_ui():
     overdue_page=overdue_page,
     total_due=total_due,
     total_overdue=total_overdue,
-    ITEMS_PER_PAGE=ITEMS_PER_PAGE
+    ITEMS_PER_PAGE=ITEMS_PER_PAGE,
     total_due_pages=total_due_pages,
-    total_overdue_pages=total_overdue_pages,
+    total_overdue_pages=total_overdue_pages
     )
 
 
