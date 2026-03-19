@@ -151,6 +151,7 @@ def dashboard():
 
 @app.route('/dashboard-ui')
 def dashboard_ui():
+    search_query = request.args.get('search', '').lower()
     lubrications = LubricationMaster.query.filter_by(is_active=True).all()
 
     total = len(lubrications)
