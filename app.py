@@ -184,17 +184,21 @@ def dashboard_ui():
             })
 
         elif status == "OVERDUE":
+
+            # ✅ Apply overdue search only if user typed something
+            #if overdue_search:
+            #   if overdue_search not in l.equipment_name.lower() and overdue_search not in l.part_name.lower():
+            #      continue
+
             overdue += 1
-            if overdue_search:
-                if overdue_search not in l.equipment_name.lower() and overdue_search not in l.part_name.lower():
-                    continue
-                overdue_list.append({
-                    "equipment": l.equipment_name,
-                    "part": l.part_name,
-                    "due_date": next_due_date,
-                    "days_overdue": days_overdue,
-                    "fill_url": f"/lubrication/fill/{l.id}"
-                })
+
+            overdue_list.append({
+                "equipment": l.equipment_name,
+                "part": l.part_name,
+                "due_date": next_due_date,
+                "days_overdue": days_overdue,
+                "fill_url": f"/lubrication/fill/{l.id}"
+            })
 
     # Sort overdue by highest delay first
     overdue_list.sort(key=lambda x: x["days_overdue"], reverse=True)
