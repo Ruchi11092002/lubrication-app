@@ -278,6 +278,7 @@ def send_due_alerts():
                         recipients=emails
                     )
 
+                    base_url = "https://lubrication-app-3.onrender.com"
                     msg.body = f"""
 Lubrication Alert
 
@@ -290,7 +291,7 @@ Due Date: {next_due_date}
 Please complete lubrication immediately.
 
 Fill here:
-http://127.0.0.1:5000/lubrication/fill/{l.id}
+{base_url}/lubrication/fill/{l.id}
 """
 
                     mail.send(msg)
