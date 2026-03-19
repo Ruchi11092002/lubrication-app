@@ -156,6 +156,25 @@ def dashboard_ui():
     section_filter = request.args.get('section', '')
     lubrications = LubricationMaster.query.filter_by(is_active=True).all()
 
+
+    due_page = int(request.args.get('due_page', 1))
+    overdue_page = int(request.args.get('overdue_page', 1))
+
+    ITEMS_PER_PAGE = 10
+    # ---------------- PAGINATION ----------------
+
+    # Due pagination
+    total_due = len(due_list)
+    start_due = (due_page - 1) * ITEMS_PER_PAGE
+    end_due = start_due + ITEMS_PER_PAGE
+    due_list_paginated = due_list[start_due:end_due]
+
+    # Overdue pagination
+    total_overdue = len(overdue_list)
+    start_overdue = (overdue_page - 1) * ITEMS_PER_PAGE
+    end_overdue = start_overdue + ITEMS_PER_PAGE
+    overdue_list_paginated = overdue_list[start_overdue:end_overdue]
+
     total = len(lubrications)
     on_time = 0
     due = 0
@@ -238,8 +257,13 @@ def dashboard_ui():
         due=due,
         overdue=overdue,
         compliance_percent=compliance_percent,
-        due_list=due_list,
-        overdue_list=overdue_list
+        due_list=due_list_paginated,
+        overdue_list=overdue_list_paginated,
+        due_page=due_page,
+        overdue_page=overdue_page,
+        total_due=total_due,
+        total_overdue=total_overdue,
+        ITEMS_PER_PAGE=ITEMS_PER_PAGE
     )
 
 
