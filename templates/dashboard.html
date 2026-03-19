@@ -121,11 +121,11 @@
 
 <div style="text-align:center; margin:15px;">
     {% if due_page > 1 %}
-        <a href="?due_page={{ due_page - 1 }}" class="button">⬅ Previous</a>
+        <a href="?due_page={{ due_page - 1 }}&overdue_page={{ overdue_page }}&due_search={{ request.args.get('due_search','') }}&section={{ request.args.get('section','') }}" class="button">⬅ Previous</a>
     {% endif %}
 
     {% if total_due > due_page * ITEMS_PER_PAGE %}
-        <a href="?due_page={{ due_page + 1 }}" class="button">Next ➡</a>
+        <a href="?due_page={{ due_page + 1 }}&overdue_page={{ overdue_page }}&due_search={{ request.args.get('due_search','') }}&section={{ request.args.get('section','') }}" class="button">Next ➡</a>
     {% endif %}
 </div>
 
@@ -170,13 +170,19 @@
 </table>
 
 <div style="text-align:center; margin:15px;">
+
     {% if overdue_page > 1 %}
-        <a href="?overdue_page={{ overdue_page - 1 }}" class="button">⬅ Previous</a>
+        <a href="?overdue_page={{ overdue_page - 1 }}&due_page={{ due_page }}&overdue_search={{ request.args.get('overdue_search','') }}&section={{ request.args.get('section','') }}" class="button">
+            ⬅ Previous
+        </a>
     {% endif %}
 
     {% if total_overdue > overdue_page * ITEMS_PER_PAGE %}
-        <a href="?overdue_page={{ overdue_page + 1 }}" class="button">Next ➡</a>
+        <a href="?overdue_page={{ overdue_page + 1 }}&due_page={{ due_page }}&overdue_search={{ request.args.get('overdue_search','') }}&section={{ request.args.get('section','') }}" class="button">
+            Next ➡
+        </a>
     {% endif %}
+
 </div>
 
 </body>
