@@ -285,7 +285,8 @@ def dashboard_ui():
     total_overdue=total_overdue,
     ITEMS_PER_PAGE=ITEMS_PER_PAGE,
     total_due_pages=total_due_pages,
-    total_overdue_pages=total_overdue_pages
+    total_overdue_pages=total_overdue_pages,
+    now=datetime.now()
     )
 
 
