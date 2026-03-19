@@ -126,15 +126,23 @@
     {% endif %}
 
     {% for p in range(1, total_due_pages + 1) %}
-        {% if p == due_page %}
-            <span style="padding:8px 12px; background:#2c3e50; color:white; border-radius:5px; margin:0 5px;">
-                {{ p }}
-            </span>
-        {% else %}
-            <a href="?due_page={{ p }}&overdue_page={{ overdue_page }}" class="button" style="margin:0 5px;">
-                {{ p }}
-            </a>
+
+        {% if p == 1 or p == total_due_pages or (p >= due_page - 2 and p <= due_page + 2) %}
+
+            {% if p == due_page %}
+                <span style="padding:8px 12px; background:#2c3e50; color:white; border-radius:5px; margin:0 3px;">
+                    {{ p }}
+                </span>
+            {% else %}
+                <a href="?due_page={{ p }}&overdue_page={{ overdue_page }}" class="button" style="margin:0 3px;">
+                    {{ p }}
+                </a>
+            {% endif %}
+
+        {% elif p == due_page - 3 or p == due_page + 3 %}
+            <span style="margin:0 5px;">...</span>
         {% endif %}
+
     {% endfor %}
 
     {% if due_page < total_due_pages %}
@@ -190,15 +198,23 @@
     {% endif %}
 
     {% for p in range(1, total_overdue_pages + 1) %}
-        {% if p == overdue_page %}
-            <span style="padding:8px 12px; background:#2c3e50; color:white; border-radius:5px; margin:0 5px;">
-                {{ p }}
-            </span>
-        {% else %}
-            <a href="?overdue_page={{ p }}&due_page={{ due_page }}" class="button" style="margin:0 5px;">
-                {{ p }}
-            </a>
+
+        {% if p == 1 or p == total_overdue_pages or (p >= overdue_page - 2 and p <= overdue_page + 2) %}
+
+            {% if p == overdue_page %}
+                <span style="padding:8px 12px; background:#2c3e50; color:white; border-radius:5px; margin:0 3px;">
+                    {{ p }}
+                </span>
+            {% else %}
+                <a href="?overdue_page={{ p }}&due_page={{ due_page }}" class="button" style="margin:0 3px;">
+                    {{ p }}
+                </a>
+            {% endif %}
+
+        {% elif p == overdue_page - 3 or p == overdue_page + 3 %}
+            <span style="margin:0 5px;">...</span>
         {% endif %}
+
     {% endfor %}
 
     {% if overdue_page < total_overdue_pages %}

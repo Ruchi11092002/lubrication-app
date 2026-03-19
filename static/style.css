@@ -74,3 +74,16 @@ a.button {
 a.button:hover {
     background: #2980b9;
 }
+
+.button {
+    padding: 6px 10px;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    margin: 2px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #2980b9;
+}
