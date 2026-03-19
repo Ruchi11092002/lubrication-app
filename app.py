@@ -172,10 +172,22 @@ def dashboard_ui():
             on_time += 1
 
         elif status == "DUE":
-            due += 1
+
+            match = True
+
             if due_search:
                 if due_search not in l.equipment_name.lower() and due_search not in l.part_name.lower():
-                    continue
+                    match = False
+
+            if section_filter:
+                if section_filter.lower() not in l.equipment_name.lower():
+                    match = False
+
+            if not match:
+                continue
+
+            due += 1
+
             due_list.append({
                 "equipment": l.equipment_name,
                 "part": l.part_name,
@@ -185,10 +197,20 @@ def dashboard_ui():
 
         elif status == "OVERDUE":
 
-            # ✅ Apply overdue search only if user typed something
-            #if overdue_search:
-            #   if overdue_search not in l.equipment_name.lower() and overdue_search not in l.part_name.lower():
-            #      continue
+            match = True
+
+            # ✅ Apply overdue search safely
+            if overdue_search:
+                if overdue_search not in l.equipment_name.lower() and overdue_search not in l.part_name.lower():
+                    match = False
+
+            # ✅ Apply section filter safely
+            if section_filter:
+                if section_filter.lower() not in l.equipment_name.lower():
+                    match = False
+
+            if not match:
+                continue
 
             overdue += 1
 
