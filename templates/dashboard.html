@@ -50,21 +50,16 @@
 <h2>Combo Line Lubrication Monitoring Dashboard</h2>
 <h4>JSL Cold Rolling Mill - Preventive Maintenance System</h4>
 
-<!-- ✅ SEARCH BOX HERE -->
 <form method="GET" style="text-align:center; margin-bottom:20px;">
-    <input 
-        type="text" 
-        name="search" 
-        placeholder="Search Equipment or Part..." 
-        value="{{ request.args.get('search', '') }}"
-        style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;"
-    >
     
-    <button type="submit" style="padding:10px 15px; border:none; background:#3498db; color:white; border-radius:6px;">
-        Search
-    </button>
+    <select name="section" style="padding:10px; border-radius:6px;">
+        <option value="">All Sections</option>
+        <option value="Entry">Entry</option>
+        <option value="Exit">Exit</option>
+        <option value="Furnace">Furnace</option>
+    </select>
 
-    <a href="/dashboard-ui" style="margin-left:10px;">Reset</a>
+    <button type="submit" style="padding:10px;">Filter</button>
 </form>
 
 <!-- cards below -->
@@ -89,6 +84,14 @@
 
 
 <h3 style="margin-top:30px;">🟡 Due Today</h3>
+
+<form method="GET" style="margin-bottom:15px;">
+    <input type="text" name="due_search" placeholder="Search Due Items..."
+        value="{{ request.args.get('due_search', '') }}"
+        style="padding:8px; width:220px; border-radius:6px; border:1px solid #ccc;">
+    
+    <button type="submit" style="padding:8px 12px;">Search</button>
+</form>
 
 <table>
     <tr>
@@ -117,6 +120,14 @@
 </table>
 
 <h3 style="margin-top:30px;">🔴 Overdue Lubrications</h3>
+
+<form method="GET" style="margin-bottom:15px;">
+    <input type="text" name="overdue_search" placeholder="Search Overdue..."
+        value="{{ request.args.get('overdue_search', '') }}"
+        style="padding:8px; width:220px; border-radius:6px; border:1px solid #ccc;">
+    
+    <button type="submit" style="padding:8px 12px;">Search</button>
+</form>
 
 <table>
     <tr>

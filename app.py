@@ -151,16 +151,10 @@ def dashboard():
 
 @app.route('/dashboard-ui')
 def dashboard_ui():
-    search_query = request.args.get('search', '').lower()
+    due_search = request.args.get('due_search', '').lower()
+    overdue_search = request.args.get('overdue_search', '').lower()
+    section_filter = request.args.get('section', '')
     lubrications = LubricationMaster.query.filter_by(is_active=True).all()
-
-    # ✅ Apply search filter
-    if search_query:
-        lubrications = [
-            l for l in lubrications
-            if search_query in l.equipment_name.lower()
-            or search_query in l.part_name.lower()
-        ]
 
     total = len(lubrications)
     on_time = 0
@@ -171,12 +165,17 @@ def dashboard_ui():
 
     for l in lubrications:
         status, next_due_date, days_overdue = get_lubrication_status(l)
-
+        if section_filter:
+            if section_filter.lower() not in l.equipment_name.lower():
+                continue
         if status == "ON_TIME":
             on_time += 1
 
         elif status == "DUE":
             due += 1
+            if due_search:
+                if due_search not in l.equipment_name.lower() and due_search not in l.part_name.lower():
+                    continue
             due_list.append({
                 "equipment": l.equipment_name,
                 "part": l.part_name,
@@ -186,13 +185,16 @@ def dashboard_ui():
 
         elif status == "OVERDUE":
             overdue += 1
-            overdue_list.append({
-                "equipment": l.equipment_name,
-                "part": l.part_name,
-                "due_date": next_due_date,
-                "days_overdue": days_overdue,
-                "fill_url": f"/lubrication/fill/{l.id}"
-            })
+            if overdue_search:
+                if overdue_search not in l.equipment_name.lower() and overdue_search not in l.part_name.lower():
+                    continue
+                overdue_list.append({
+                    "equipment": l.equipment_name,
+                    "part": l.part_name,
+                    "due_date": next_due_date,
+                    "days_overdue": days_overdue,
+                    "fill_url": f"/lubrication/fill/{l.id}"
+                })
 
     # Sort overdue by highest delay first
     overdue_list.sort(key=lambda x: x["days_overdue"], reverse=True)
