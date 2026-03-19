@@ -209,30 +209,40 @@ def dashboard_ui():
 
 @app.route('/lubrication/fill/<int:lubrication_id>', methods=['GET', 'POST'])
 def fill_lubrication(lubrication_id):
+
     lubrication = LubricationMaster.query.get_or_404(lubrication_id)
 
     if request.method == 'POST':
-        
-        lubricated_on = datetime.strptime(
-            request.form['lubricated_on'],
-            '%Y-%m-%d'
-        ).date()
 
-        incharge = request.form['incharge']
-        remarks = request.form.get('remarks')
+        try:
+            date_str = request.form.get('lubricated_on')
+            if not date_str:
+                return "Date is required"
 
-        log = LubricationLog(
-            lubrication_id=lubrication.id,
-            lubricated_on=lubricated_on,
-            incharge=incharge,
-            remarks=remarks
-        )
+            lubricated_on = datetime.strptime(date_str, '%Y-%m-%d').date()
 
-        db.session.add(log)
-        db.session.commit()
+            incharge = request.form.get('incharge')
+            remarks = request.form.get('remarks')
 
-        return redirect(url_for('dashboard'))
+            if not incharge:
+                return "Incharge is required"
 
+            log = LubricationLog(
+                lubrication_id=lubrication.id,
+                lubricated_on=lubricated_on,
+                incharge=incharge,
+                remarks=remarks
+            )
+
+            db.session.add(log)
+            db.session.commit()
+
+        except Exception as e:
+            return f"Error occurred: {str(e)}"
+
+        return redirect(url_for('dashboard_ui'))
+
+    # ✅ KEEP THIS (GET request)
     return render_template(
         'lubrication_form.html',
         lubrication=lubrication,
