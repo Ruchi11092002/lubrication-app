@@ -119,6 +119,16 @@
     {% endif %}
 </table>
 
+<div style="text-align:center; margin:15px;">
+    {% if due_page > 1 %}
+        <a href="?due_page={{ due_page - 1 }}" class="button">⬅ Previous</a>
+    {% endif %}
+
+    {% if total_due > due_page * ITEMS_PER_PAGE %}
+        <a href="?due_page={{ due_page + 1 }}" class="button">Next ➡</a>
+    {% endif %}
+</div>
+
 <h3 style="margin-top:30px;">🔴 Overdue Lubrications</h3>
 
 <form method="GET" style="margin-bottom:15px;">
@@ -158,6 +168,16 @@
     </tr>
     {% endif %}
 </table>
+
+<div style="text-align:center; margin:15px;">
+    {% if overdue_page > 1 %}
+        <a href="?overdue_page={{ overdue_page - 1 }}" class="button">⬅ Previous</a>
+    {% endif %}
+
+    {% if total_overdue > overdue_page * ITEMS_PER_PAGE %}
+        <a href="?overdue_page={{ overdue_page + 1 }}" class="button">Next ➡</a>
+    {% endif %}
+</div>
 
 </body>
 </html>
