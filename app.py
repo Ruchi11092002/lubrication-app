@@ -31,6 +31,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'lu
 
 db = SQLAlchemy(app)
 
+with app.app_context():
+    db.create_all()
 
 class LubricationMaster(db.Model):
     __tablename__ = 'lubrication_master'
