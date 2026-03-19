@@ -152,8 +152,22 @@ def dashboard():
 @app.route('/dashboard-ui')
 def dashboard_ui():
 
-    due_page = int(request.args.get('due_page', 1))
-    overdue_page = int(request.args.get('overdue_page', 1))
+    def safe_int(value, default):
+        try:
+            return int(value)
+        except:
+            return default
+
+    print("ARGS:", request.args)   # ✅ ADD THIS LINE HERE
+    
+    due_page = safe_int(request.args.get('due_page'), 1)
+    overdue_page = safe_int(request.args.get('overdue_page'), 1)
+
+    if due_page < 1:
+        due_page = 1
+
+    if overdue_page < 1:
+        overdue_page = 1
 
     ITEMS_PER_PAGE = 10
 
