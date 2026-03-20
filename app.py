@@ -173,7 +173,6 @@ def dashboard_ui():
 
     due_search = request.args.get('due_search', '').lower()
     overdue_search = request.args.get('overdue_search', '').lower()
-    section_filter = request.args.get('section', '')
     lubrications = LubricationMaster.query.filter_by(is_active=True).all()
 
 
@@ -186,9 +185,6 @@ def dashboard_ui():
 
     for l in lubrications:
         status, next_due_date, days_overdue = get_lubrication_status(l)
-        if section_filter:
-            if section_filter.lower() not in l.equipment_name.lower():
-                continue
         if status == "ON_TIME":
             on_time += 1
 
@@ -198,10 +194,6 @@ def dashboard_ui():
 
             if due_search:
                 if due_search not in l.equipment_name.lower() and due_search not in l.part_name.lower():
-                    match = False
-
-            if section_filter:
-                if section_filter.lower() not in l.equipment_name.lower():
                     match = False
 
             if not match:
@@ -224,12 +216,6 @@ def dashboard_ui():
             if overdue_search:
                 if overdue_search not in l.equipment_name.lower() and overdue_search not in l.part_name.lower():
                     match = False
-
-            # ✅ Apply section filter safely
-            if section_filter:
-                if section_filter.lower() not in l.equipment_name.lower():
-                    match = False
-
             if not match:
                 continue
 
