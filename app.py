@@ -290,6 +290,7 @@ def dashboard_ui():
     )
 
 
+
 @app.route('/lubrication/fill/<int:lubrication_id>', methods=['GET', 'POST'])
 def fill_lubrication(lubrication_id):
 
