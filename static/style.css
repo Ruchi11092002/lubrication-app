@@ -26,53 +26,56 @@ h4 {
 
 .card {
     padding: 20px;
-    border-radius: 12px;
-    width: 200px;
+    border-radius: 10px;
+    width: 220px;
     color: white;
     font-size: 18px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
 }
 
-.total { background: #2c3e50; }
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.total { background: #34495e; }
 .ontime { background: #27ae60; }
 .due { background: #f39c12; }
 .overdue { background: #e74c3c; }
-.compliance { background: #2980b9; }
+.compliance { background: #16a085; }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 30px;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
+    margin-top: 10px;
 }
 
 th {
-    background: #34495e;
+    background: #2c3e50;
     color: white;
-}
-
-th, td {
     padding: 12px;
-    text-align: center;
 }
 
-tr:nth-child(even) {
-    background: #f9f9f9;
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
 }
 
 a.button {
-    padding: 10px 16px;
+    padding: 8px 14px;
     background: #3498db;
     color: white;
     text-decoration: none;
     border-radius: 6px;
+    transition: 0.2s;
 }
 
 a.button:hover {
-    background: #2980b9;
+    background: #1d6fa5;
 }
 
 .button {
@@ -120,3 +123,52 @@ a.button:hover {
     padding: 8px 12px;
     border-radius: 6px;
 }
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.date {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.pagination span,
+.pagination a {
+    margin: 3px;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.pagination span {
+    background: #2c3e50;
+    color: white;
+}
+
+.pagination a {
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+}
+

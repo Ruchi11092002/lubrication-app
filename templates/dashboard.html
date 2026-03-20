@@ -48,18 +48,16 @@
 
 
 <div class="header">
-
     <div class="header-left">
-        <h1>Combo Line Lubrication Dashboard</h1>
+        <h1>⚙ Combo Line Lubrication Dashboard</h1>
         <p>JSL Cold Rolling Mill – Preventive Maintenance System</p>
     </div>
 
     <div class="header-right">
         <span class="date">
-            {{ now.strftime('%d %b %Y') }}
+            📅 {{ now.strftime('%d %b %Y') if now else '' }}
         </span>
     </div>
-
 </div>
 
 <form method="GET" style="text-align:center; margin-bottom:20px;">
@@ -131,7 +129,7 @@
     {% endif %}
 </table>
 
-<div style="text-align:center; margin:15px;">
+<div class="pagination" style="text-align:center; margin:15px;">
 
     {% if due_page > 1 %}
         <a href="?due_page={{ due_page - 1 }}&overdue_page={{ overdue_page }}" class="button">Previous</a>
