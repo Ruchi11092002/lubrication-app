@@ -134,6 +134,7 @@ a.button:hover {
     padding: 20px 30px;
     border-radius: 10px;
     margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .header h1 {
@@ -198,5 +199,93 @@ button {
 
 button:hover {
     background: #1d6fa5;
+}
+
+/* Improve spacing */
+body {
+    background: #f4f6f8;
+}
+
+/* Section headings */
+h3 {
+    margin-top: 30px;
+    color: #2c3e50;
+}
+
+/* Search box */
+input[type="text"] {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #3498db;
+}
+
+/* Buttons */
+button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d6fa5;
+}
+
+/* Table container look */
+table {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Pagination styling */
+.pagination {
+    margin-top: 10px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    background: #3498db;
+    color: white;
+    border-radius: 6px;
+    margin: 3px;
+    text-decoration: none;
+}
+
+.pagination span {
+    padding: 8px 12px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 6px;
+    margin: 3px;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.card h2 {
+    margin: 5px 0 0;
+    font-size: 26px;
+}
+
+.icon {
+    font-size: 32px;
+    opacity: 0.8;
 }
 

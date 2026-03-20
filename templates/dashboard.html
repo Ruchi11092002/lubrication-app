@@ -23,24 +23,58 @@
 
 <!-- cards below -->
 <div class="cards">
-    <div class="card total">
-        Total<br><b>{{ total }}</b>
-    </div>
-    <div class="card ontime">
-        On Time<br><b>{{ on_time }}</b>
-    </div>
-    <div class="card due">
-        Due Today<br><b>{{ due }}</b>
-    </div>
-    <div class="card overdue" style="background:#e74c3c;">
-        Overdue<br><b>{{ overdue }}</b>
-    </div>
-    <div class="card compliance" style="background:#2ecc71;">
-        Compliance %<br>
-        <b>{{ compliance_percent if compliance_percent is not none else 0 }}%</b>
-    </div>
-</div>
 
+    <div class="card total">
+        <div class="card-content">
+            <div>
+                <p>Total</p>
+                <h2>{{ total }}</h2>
+            </div>
+            <div class="icon">📊</div>
+        </div>
+    </div>
+
+    <div class="card ontime">
+        <div class="card-content">
+            <div>
+                <p>On Time</p>
+                <h2>{{ on_time }}</h2>
+            </div>
+            <div class="icon">✅</div>
+        </div>
+    </div>
+
+    <div class="card due">
+        <div class="card-content">
+            <div>
+                <p>Due Today</p>
+                <h2>{{ due }}</h2>
+            </div>
+            <div class="icon">⚠</div>
+        </div>
+    </div>
+
+    <div class="card overdue">
+        <div class="card-content">
+            <div>
+                <p>Overdue</p>
+                <h2>{{ overdue }}</h2>
+            </div>
+            <div class="icon">❌</div>
+        </div>
+    </div>
+
+    <div class="card compliance">
+        <div class="card-content">
+            <div>
+                <p>Compliance</p>
+                <h2>{{ compliance_percent if compliance_percent is not none else 0 }}%</h2>
+            </div>
+            <div class="icon">📈</div>
+        </div>
+    </div>
+
+</div>
 
 <h3 style="margin-top:30px;">🟡 Due Today</h3>
 
