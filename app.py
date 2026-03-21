@@ -501,6 +501,60 @@ def backup_now():
     result = backup_database()
     return result
 
+from flask import send_file
+from io import BytesIO
+import pandas as pd
+
+@app.route('/export-lubrication-log')
+def export_lubrication_log():
+
+    logs = LubricationLog.query.all()
+
+    data = []
+
+    for log in logs:
+        master = LubricationMaster.query.get(log.lubrication_id)
+
+        data.append({
+            "Equipment": master.equipment_name,
+            "Part": master.part_name,
+            "Frequency": master.frequency_days,
+            "Date": log.lubricated_on
+        })
+
+    df = pd.DataFrame(data)
+
+    if df.empty:
+        return "No data available"
+
+    df["Date"] = pd.to_datetime(df["Date"])
+    df["Month"] = df["Date"].dt.strftime("%b-%Y")
+    df["Day"] = df["Date"].dt.strftime("%d")
+
+    pivot = df.pivot_table(
+        index=["Equipment", "Part","Frequency"],
+        columns="Month",
+        values="Day",
+        aggfunc=lambda x: ", ".join(sorted(x))
+    )
+
+    pivot = pivot.sort_index(axis=1)
+    
+    pivot = pivot.fillna("")
+
+    output = BytesIO()
+
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
+        pivot.to_excel(writer, sheet_name="Lubrication Log")
+
+    output.seek(0)
+
+    return send_file(
+        output,
+        download_name="lubrication_log.xlsx",
+        as_attachment=True
+    )
+
 @app.route("/")
 def home():
     return redirect(url_for('dashboard_ui'))
