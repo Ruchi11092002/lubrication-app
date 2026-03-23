@@ -568,6 +568,8 @@ scheduler.add_job(backup_database, 'cron', hour=23, minute=0)
 
 @app.route("/run-alerts")
 def run_alerts():
+    import sqlite3
+    from datetime import datetime, date
     try:
         from datetime import date
         today = date.today()
@@ -593,7 +595,7 @@ def run_alerts():
                     overdue_list.append(row)
 
         if due_list or overdue_list:
-            send_email(due_list, overdue_list)
+            send_due_alerts(due_list, overdue_list)
 
         conn.close()
 
