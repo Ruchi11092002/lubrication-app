@@ -568,8 +568,39 @@ scheduler.add_job(backup_database, 'cron', hour=23, minute=0)
 
 @app.route("/run-alerts")
 def run_alerts():
-    send_due_alerts()
-    return "Alerts triggered"
+    try:
+        from datetime import date
+        today = date.today()
+
+        conn = sqlite3.connect("lubrication.db")
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM lubrication")
+        rows = cursor.fetchall()
+
+        due_list = []
+        overdue_list = []
+
+        for row in rows:
+            if row["next_due_date"]:
+                next_due = datetime.strptime(row["next_due_date"], "%Y-%m-%d").date()
+
+                if next_due == today:
+                    due_list.append(row)
+
+                elif next_due < today:
+                    overdue_list.append(row)
+
+        if due_list or overdue_list:
+            send_email(due_list, overdue_list)
+
+        conn.close()
+
+        return "Alerts triggered successfully"
+
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
