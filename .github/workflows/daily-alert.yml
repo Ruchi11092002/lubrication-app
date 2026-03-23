@@ -1,0 +1,15 @@
+name: Send Daily Lubrication Alerts
+
+on:
+  schedule:
+    - cron: "30 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  send-alert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call alert endpoint
+        run: |
+          curl https://lubrication-app-3.onrender.com/run-alerts
