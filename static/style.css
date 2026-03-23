@@ -125,34 +125,37 @@ a.button:hover {
 }
 
 /* HEADER */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+.dashboard-header {
+    background: linear-gradient(90deg,#2c3e50,#4ca1af);
     color: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    padding: 22px 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;   /* 👈 more spacing below */
+    position: relative;
+    text-align: center;
 }
 
-.header h1 {
+.dashboard-header {
+    text-align: center;
+}
+
+.dashboard-header h2 {
     margin: 0;
-    font-size: 24px;
+    font-weight: 600;
 }
 
-.header p {
+.dashboard-header p {
     margin: 5px 0 0;
-    font-size: 14px;
     opacity: 0.9;
 }
 
-.date {
-    background: rgba(255,255,255,0.2);
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 14px;
+.header-date {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 14px;
+    border-radius: 8px;
 }
 
 .pagination span,
@@ -287,5 +290,65 @@ table {
 .icon {
     font-size: 32px;
     opacity: 0.8;
+}
+
+/* Center align dashboard tables */
+.dashboard-table th,
+.dashboard-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dashboard-table td {
+    padding: 12px;
+}
+
+.export-btn {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* Export button container (right align) */
+.export-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0 20px 0;
+}
+
+/* Export button style */
+.export-btn {
+    background: #3498db;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s ease;
+}
+
+.export-btn:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+/* download icon animation */
+.download-icon {
+    display: inline-block;
+    animation: bounce 1.2s infinite;
+}
+
+/* animation */
+@keyframes bounce {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(3px); }
+    100% { transform: translateY(0px); }
+}
+
+.export-btn:hover .download-icon {
+    animation: none;
+    transform: translateY(2px);
 }
 
