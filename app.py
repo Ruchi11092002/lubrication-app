@@ -566,6 +566,10 @@ scheduler.start()
 scheduler.add_job(backup_database, 'cron', hour=23, minute=0)
 # -------------------------------------------------
 
+@app.route("/run-alerts")
+def run_alerts():
+    send_due_alerts()
+    return "Alerts triggered"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
