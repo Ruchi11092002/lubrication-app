@@ -14,12 +14,12 @@ from apscheduler.schedulers.background import BackgroundScheduler
 app = Flask(__name__)
 
 # ---------------- MAIL CONFIGURATION ----------------
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'smtp.office365.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'ruchita11jsl@gmail.com'
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')  # your real app password
-app.config['MAIL_DEFAULT_SENDER'] = 'ruchita11jsl@gmail.com'
+app.config['MAIL_USERNAME'] = 'ruchita.yerra@jindalstainless.com'
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = 'ruchita.yerra@jindalstainless.com'
 # ----------------------------------------------------
 
 mail = Mail(app)
