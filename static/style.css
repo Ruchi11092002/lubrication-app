@@ -91,38 +91,7 @@ a.button:hover {
     background: #2980b9;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(90deg, #2c3e50, #4ca1af);
-    padding: 20px 30px;
-    border-radius: 10px;
-    color: white;
-    margin-bottom: 25px;
-}
 
-.header-left h1 {
-    margin: 0;
-    font-size: 26px;
-}
-
-.header-left p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    opacity: 0.9;
-}
-
-.header-right {
-    font-size: 14px;
-    text-align: right;
-}
-
-.date {
-    background: rgba(255,255,255,0.2);
-    padding: 8px 12px;
-    border-radius: 6px;
-}
 
 /* HEADER */
 .dashboard-header {
