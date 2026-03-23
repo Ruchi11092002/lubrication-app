@@ -1,7 +1,7 @@
 import os
 os.environ["SQLALCHEMY_CEXT_DISABLED"] = "1"
 import math
-import sqlite3
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, timedelta
@@ -568,39 +568,9 @@ scheduler.add_job(backup_database, 'cron', hour=23, minute=0)
 
 @app.route("/run-alerts")
 def run_alerts():
-    import sqlite3
-    from datetime import datetime, date
     try:
-        from datetime import date
-        today = date.today()
-
-        conn = sqlite3.connect("lubrication.db")
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT * FROM lubrication")
-        rows = cursor.fetchall()
-
-        due_list = []
-        overdue_list = []
-
-        for row in rows:
-            if row["next_due_date"]:
-                next_due = datetime.strptime(row["next_due_date"], "%Y-%m-%d").date()
-
-                if next_due == today:
-                    due_list.append(row)
-
-                elif next_due < today:
-                    overdue_list.append(row)
-
-        if due_list or overdue_list:
-            send_due_alerts(due_list, overdue_list)
-
-        conn.close()
-
+        send_due_alerts()
         return "Alerts triggered successfully"
-
     except Exception as e:
         return f"Error: {str(e)}"
 
