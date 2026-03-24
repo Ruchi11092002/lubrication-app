@@ -19,12 +19,7 @@ jobs:
 
           subject = "Combo Line Lubrication Alert"
 
-          body = """
-Daily Lubrication Reminder
-
-Check dashboard:
-https://lubrication-app-3.onrender.com
-"""
+          body = "Daily Lubrication Reminder\n\nCheck dashboard:\nhttps://lubrication-app-3.onrender.com"
 
           msg = MIMEText(body)
           msg['Subject'] = subject
