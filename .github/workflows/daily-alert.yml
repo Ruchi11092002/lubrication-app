@@ -2,7 +2,7 @@ name: Send Daily Lubrication Alerts
 
 on:
   schedule:
-    - cron: "30 4 * * *"
+    - cron: "30 4 * * *"   # 10:00 AM IST
   workflow_dispatch:
 
 jobs:
@@ -10,6 +10,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Call alert endpoint
+      - name: Send Outlook Mail
         run: |
-          curl https://lubrication-app-3.onrender.com/run-alerts
+          python - <<EOF
+          import smtplib
+          from email.mime.text import MIMEText
+          import requests
+          import os
+
+          # Call your app to get due items
+          r = requests.get("https://lubrication-app-3.onrender.com/dashboard")
+          data = r.json()
+
+          if data["due"] == 0:
+              print("No alerts today")
+              exit()
+
+          msg = MIMEText(f"""
+          Lubrication Alerts
+
+          Due Today: {data['due']}
+          Total Points: {data['total_lubrication_points']}
+
+          Open Dashboard:
+          https://lubrication-app-3.onrender.com
+          """)
+
+          msg['Subject'] = "Lubrication Alert - Combo Line"
+          msg['From'] = "ruchita.yerra@jindalstainless.com"
+          msg['To'] = "ruchita.yerra@jindalstainless.com"
+
+          server = smtplib.SMTP("smtp.office365.com", 587)
+          server.starttls()
+          server.login(
+              "ruchita.yerra@jindalstainless.com",
+              os.environ["OUTLOOK_PASSWORD"]
+          )
+          server.send_message(msg)
+          server.quit()
+
+          print("Mail sent")
+          EOF
+        env:
+          OUTLOOK_PASSWORD: ${{ secrets.OUTLOOK_PASSWORD }}
