@@ -1,4 +1,4 @@
-name: Outlook Lubrication Alert
+name: Outlook Lubrication Alert v2
 
 on:
   workflow_dispatch:
