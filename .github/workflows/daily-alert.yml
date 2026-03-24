@@ -2,7 +2,7 @@ name: Send Daily Lubrication Alerts
 
 on:
   schedule:
-    - cron: "30 4 * * *"   # 10:00 AM IST
+    - cron: "30 4 * * *"   # 10 AM IST
   workflow_dispatch:
 
 jobs:
@@ -18,25 +18,21 @@ jobs:
           import requests
           import os
 
-          # Call your app to get due items
           r = requests.get("https://lubrication-app-3.onrender.com/dashboard")
           data = r.json()
 
-          if data["due"] == 0:
-              print("No alerts today")
-              exit()
+          subject = "Combo Line Lubrication Alert"
 
-          msg = MIMEText(f"""
-          Lubrication Alerts
-
+          body = f"""
           Due Today: {data['due']}
           Total Points: {data['total_lubrication_points']}
 
           Open Dashboard:
-          https://lubrication-app-3.onrender.com
-          """)
+          https://lubrication-app-3.onrender.com/dashboard-ui
+          """
 
-          msg['Subject'] = "Lubrication Alert - Combo Line"
+          msg = MIMEText(body)
+          msg['Subject'] = subject
           msg['From'] = "ruchita.yerra@jindalstainless.com"
           msg['To'] = "ruchita.yerra@jindalstainless.com"
 
@@ -46,6 +42,7 @@ jobs:
               "ruchita.yerra@jindalstainless.com",
               os.environ["OUTLOOK_PASSWORD"]
           )
+
           server.send_message(msg)
           server.quit()
 
