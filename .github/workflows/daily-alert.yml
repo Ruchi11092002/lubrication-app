@@ -15,20 +15,16 @@ jobs:
           python - <<EOF
           import smtplib
           from email.mime.text import MIMEText
-          import requests
           import os
-
-          r = requests.get("https://lubrication-app-3.onrender.com/dashboard")
-          data = r.json()
 
           subject = "Combo Line Lubrication Alert"
 
-          body = f"""
-          Due Today: {data['due']}
-          Total Points: {data['total_lubrication_points']}
+          body = """
+          Daily Lubrication Reminder
 
-          Open Dashboard:
-          https://lubrication-app-3.onrender.com/dashboard-ui
+          Please check lubrication dashboard.
+
+          https://lubrication-app-3.onrender.com
           """
 
           msg = MIMEText(body)
@@ -38,6 +34,7 @@ jobs:
 
           server = smtplib.SMTP("smtp.office365.com", 587)
           server.starttls()
+
           server.login(
               "ruchita.yerra@jindalstainless.com",
               os.environ["OUTLOOK_PASSWORD"]
@@ -46,7 +43,7 @@ jobs:
           server.send_message(msg)
           server.quit()
 
-          print("Mail sent")
+          print("Mail sent successfully")
           EOF
         env:
           OUTLOOK_PASSWORD: ${{ secrets.OUTLOOK_PASSWORD }}
