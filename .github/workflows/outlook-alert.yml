@@ -1,16 +1,16 @@
 name: Outlook Lubrication Alert
 
 on:
-  schedule:
-    - cron: "30 4 * * *"   # 10 AM IST
   workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * *'   # 10 AM IST
 
 jobs:
   send-mail:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send Outlook Mail
+      - name: Send email
         run: |
           python - <<EOF
           import smtplib
@@ -20,11 +20,11 @@ jobs:
           subject = "Combo Line Lubrication Alert"
 
           body = """
-          Daily Lubrication Reminder
+Daily Lubrication Reminder
 
-          Please check lubrication dashboard:
-          https://lubrication-app-3.onrender.com
-          """
+Check dashboard:
+https://lubrication-app-3.onrender.com
+"""
 
           msg = MIMEText(body)
           msg['Subject'] = subject
@@ -42,7 +42,7 @@ jobs:
           server.send_message(msg)
           server.quit()
 
-          print("Mail sent successfully")
+          print("Mail sent")
           EOF
         env:
           OUTLOOK_PASSWORD: ${{ secrets.OUTLOOK_PASSWORD }}
